@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Book List</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
     <div class="container mt-4">
         <h1>Book List</h1>
-        <a th:href="@{/addbook}" class="btn btn-primary mb-3">Add New Book</a>
+        <a th:href="@{/addbook}" class="btn btn-success mb-3">Add Book</a>
+        
         <table class="table table-striped">
             <thead>
                 <tr>
