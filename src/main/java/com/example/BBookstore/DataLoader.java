@@ -44,5 +44,6 @@ public class DataLoader implements CommandLineRunner {
         Category category7 = new Category();
         category7.setName("Chemistry");
         categoryRepository.save(category7);
+         
     }
 }
