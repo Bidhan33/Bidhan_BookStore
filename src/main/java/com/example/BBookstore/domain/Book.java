@@ -1,5 +1,7 @@
 package com.example.BBookstore.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,8 +20,8 @@ public class Book {
     private double price;
 
     @ManyToOne
+    @JsonBackReference
     private Category category;
-
     
     public Long getId() {
         return id;
