@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Book List</title>
@@ -7,7 +8,18 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h1>Book List</h1>
+        <!-- Add welcome message and logout button -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Book List</h1>
+            <div>
+                <span class="me-2">Welcome <b sec:authentication="name"></b>!</span>
+                <span class="badge bg-secondary me-2" sec:authentication="principal.authorities"></span>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-outline-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+        
         <a th:href="@{/addbook}" class="btn btn-success mb-3">Add Book</a>
         
         <table class="table table-striped">
@@ -34,7 +46,9 @@
                     <td th:text="${book.category.name}"></td>
                     <td>
                         <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-warning btn-sm">Edit</a>
-                        <a th:href="@{/delete/{id}(id=${book.id})}" 
+                        <!-- Only show delete button for ADMIN users -->
+                        <a sec:authorize="hasRole('ADMIN')" 
+                           th:href="@{/delete/{id}(id=${book.id})}" 
                            class="btn btn-danger btn-sm"
                            onclick="return confirm('Are you sure you want to delete this book?')">
                             Delete

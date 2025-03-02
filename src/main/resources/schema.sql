@@ -13,6 +13,6 @@ CREATE TABLE book (
     publication_year INT NOT NULL,
     isbn VARCHAR(50) UNIQUE NOT NULL,
     price DECIMAL(10,2) NOT NULL,
-    category_id BIGINT,
+    category_id BIGINT,b
     FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
 );
