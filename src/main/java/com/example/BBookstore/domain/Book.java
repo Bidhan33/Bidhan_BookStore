@@ -21,6 +21,7 @@ public class Book {
 
     @ManyToOne
     @JsonBackReference
+    
     private Category category;
     
     public Long getId() {
