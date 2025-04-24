@@ -1,13 +1,18 @@
 FROM eclipse-temurin:17-jdk-jammy
 
-WORKDIR /app
-
-COPY . .
-
-RUN apt-get update && \
-    apt-get install -y maven && \
-    mvn clean package -DskipTests
-
+WORKDIR /opt/app
+ 
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN chmod +x ./mvnw
+RUN ./mvnw dependency:go-offline
+ 
+COPY ./src ./src
+RUN ./mvnw clean install -DskipTests
+ 
+# If you don't want to install find:
+RUN cp target/*.jar app.jar
+ 
 EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "target/BBookstore-0.0.1-SNAPSHOT.jar"]
+ 
+ENTRYPOINT ["java", "-jar", "app.jar"]
